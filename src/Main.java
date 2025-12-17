@@ -2,7 +2,7 @@ public class Main {
     public static void main(String[] args) {
         BankAccount acc1 = new BankAccount("111", 1000, "Savings");
         BankAccount acc2 = new BankAccount("222", 500, "Checking");
-        Customer c1 = new Customer("C1", "Alice", "alice@mail.com", acc1);
+        Customer c1 = new Customer("C1", "Gulnur", "alice@mail.com", acc1);
         Customer c2 = new Customer("C2", "Bob", "bob@mail.com", acc2);
         Bank bank = new Bank("MyBank");
         bank.addCustomer(c1);
