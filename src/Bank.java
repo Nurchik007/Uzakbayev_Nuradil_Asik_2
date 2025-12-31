@@ -1,16 +1,37 @@
-import java.util.ArrayList;
+import java.util.*;
+import java.util.stream.Collectors;
+
 public class Bank {
-    String bankName;
-    ArrayList<Customer> customers = new ArrayList<>();
-    public Bank(String name) {
-        bankName = name;
+    private List<Customer> customers = new ArrayList<>();
+    private List<BankAccount> accounts = new ArrayList<>();
+
+    public void addCustomer(Customer customer) {
+        customers.add(customer);
     }
-    public void addCustomer(Customer c) {
-        customers.add(c);
+
+    public void addAccount(BankAccount account) {
+        accounts.add(account);
     }
-    public void showCustomers() {
-        for (Customer c : customers) {
-            System.out.println(c);
-        }
+
+    public List<Customer> searchCustomerByName(String name) {
+        return customers.stream()
+                .filter(c -> c.getName().equalsIgnoreCase(name))
+                .collect(Collectors.toList());
+    }
+
+    public List<BankAccount> filterAccountsByBalance(double minBalance) {
+        return accounts.stream()
+                .filter(acc -> acc.getBalance() >= minBalance)
+                .collect(Collectors.toList());
+    }
+
+    public List<BankAccount> sortAccountsByBalance() {
+        return accounts.stream()
+                .sorted(Comparator.comparingDouble(BankAccount::getBalance))
+                .collect(Collectors.toList());
+    }
+
+    public void monthlyUpdateAll() {
+        accounts.forEach(BankAccount::calculateMonthlyUpdate);
     }
 }
