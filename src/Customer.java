@@ -1,18 +1,30 @@
 public class Customer {
-    String customerId;
-    String name;
-    String email;
-    BankAccount account;
-    public Customer(String id, String n, String e, BankAccount acc) {
-        customerId = id;
-        name = n;
-        email = e;
-        account = acc;
+    private String id;
+    private String name;
+
+    public Customer(String id, String name) {
+        this.id = id;
+        this.name = name;
     }
-    public String getInfo() {
-        return "Customer: " + name + " (" + email + ")";
-    }
+
+    public String getId() { return id; }
+    public String getName() { return name; }
+
+    @Override
     public String toString() {
-        return getInfo() + " -> " + account.toString();
+        return "Customer " + name + " (ID: " + id + ")";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Customer)) return false;
+        Customer that = (Customer) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }
