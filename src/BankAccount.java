@@ -1,13 +1,22 @@
 public abstract class BankAccount {
     private String accountNumber;
     private double balance;
+    private MonthlyUpdatePolicy updatePolicy; // добавляем стратегию
 
-    public BankAccount(String accountNumber, double balance) {
+    public BankAccount(String accountNumber, double balance, MonthlyUpdatePolicy updatePolicy) {
         this.accountNumber = accountNumber;
         this.balance = balance;
+        this.updatePolicy = updatePolicy;
     }
 
-    public abstract void calculateMonthlyUpdate();
+    public void calculateMonthlyUpdate() {
+        updatePolicy.apply(this);
+    }
+
+    // теперь Bank может вызвать этот метод
+    public MonthlyUpdatePolicy getUpdatePolicy() {
+        return updatePolicy;
+    }
 
     public String getAccountNumber() { return accountNumber; }
     public double getBalance() { return balance; }

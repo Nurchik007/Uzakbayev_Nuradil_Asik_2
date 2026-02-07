@@ -1,0 +1,15 @@
+GET http://localhost:8080/accounts
+
+###
+POST http://localhost:8080/accounts
+Content-Type: application/json
+
+{
+  "account_number": "A013",
+  "balance": 700,
+  "type": "Savings"
+}
+###
+DELETE http://localhost:8080/accounts/A003
+
+
