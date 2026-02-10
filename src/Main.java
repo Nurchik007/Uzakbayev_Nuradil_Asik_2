@@ -1,15 +1,23 @@
+import domain.builder.CustomerBuilder;
+import domain.factory.AccountFactory;
+import domain.accounts.Customer;
+import domain.accounts.BankAccount;
+import domain.accounts.Bank;
+
 public class Main {
     public static void main(String[] args) {
         Bank bank = new Bank();
 
-        Customer c1 = new Customer("1", "John");
-        Customer c2 = new Customer("2", "Mary");
+        // Builder
+        Customer c1 = new CustomerBuilder().setId("1").setName("John").build();
+        Customer c2 = new CustomerBuilder().setId("2").setName("Mary").build();
 
         bank.addCustomer(c1);
         bank.addCustomer(c2);
 
-        BankAccount acc1 = new SavingsAccount("A001", 1000, 0.05);
-        BankAccount acc2 = new CheckingAccount("A002", 500, 20);
+        // Factory
+        BankAccount acc1 = AccountFactory.createAccount("savings", "A001", 1000, 0.05);
+        BankAccount acc2 = AccountFactory.createAccount("checking", "A002", 500, 20);
 
         bank.addAccount(acc1);
         bank.addAccount(acc2);
